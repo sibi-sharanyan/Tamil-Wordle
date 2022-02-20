@@ -21,6 +21,7 @@ import {
   BsGithub,
 } from "react-icons/bs";
 import validWords from "../wordlist/all-word";
+import easyWords from "../wordlist/easy-words";
 
 import "../styles/keyboard.scss";
 
@@ -127,10 +128,10 @@ export default function MainPage() {
     const diffDays = date2.diff(date1, "day");
 
     //TODO: change to easy words
-    const wordsCount = validWords.length;
+    const wordsCount = easyWords.length;
 
     const index = diffDays % wordsCount;
-    let currentWord = validWords[index];
+    let currentWord = easyWords[index];
 
     console.log(
       "days",
@@ -519,9 +520,7 @@ export default function MainPage() {
                 for (let i = 0; i < word.length; i++) {
                   if (currentWord[i].char === word[i]) {
                     answers.push("#538d4e");
-                  } else if (
-                    currentWord.map((word) => word.char).includes(word[i])
-                  ) {
+                  } else if (word.includes(currentWord[i].char)) {
                     answers.push("#b59f3b");
                   } else if (isSameSeries(word[i], currentWord[i].char)) {
                     answers.push("#713f48");
