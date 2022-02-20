@@ -21,6 +21,9 @@ import {
   BsGithub,
 } from "react-icons/bs";
 import validWords from "../wordlist/all-word";
+
+import "../styles/keyboard.scss";
+
 // function toUnicode(str) {
 //   return str
 //     .split("")
