@@ -63,9 +63,62 @@ const tamilCharacters = [
   ["ன்", "ன", "னா", "னி", "னீ", "னு", "னூ", "னெ", "னே", "னை", "னொ", "னோ", "னௌ"],
 ];
 
+const SocialHandle = () => (
+  <VStack spacing={3}>
+    <HStack>
+      <Text>Made with</Text>
+      <BsFillHeartFill color="red" />
+      <Text>
+        in தமிழ் by <strong>Sibi</strong>
+      </Text>
+    </HStack>
+    <HStack spacing={6}>
+      <BsGithub
+        fontSize={24}
+        onClick={() => {
+          if (window) {
+            window.open("https://github.com/sibi-sharanyan", "_blank")?.focus();
+          }
+        }}
+        cursor={"pointer"}
+        color="white"
+      />
+      <BsLinkedin
+        fontSize={24}
+        onClick={() => {
+          if (window) {
+            window
+              .open("https://www.linkedin.com/in/sibi-sharanyan", "_blank")
+              ?.focus();
+          }
+        }}
+        cursor={"pointer"}
+        color="white"
+      />{" "}
+      <BsTwitter
+        fontSize={24}
+        onClick={() => {
+          if (window) {
+            window
+              .open("https://twitter.com/sibi_sharanyan", "_blank")
+              ?.focus();
+          }
+        }}
+        cursor={"pointer"}
+        color="white"
+      />{" "}
+    </HStack>
+  </VStack>
+);
+
 export default function MainPage() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isGameOverOpen,
+    onOpen: onGameOverOpen,
+    onClose: onGameOverClose,
+  } = useDisclosure();
 
   const [word, setWord] = React.useState<string[]>([]);
   const [filledCharacters, setFilledCharacters] = React.useState<
@@ -108,7 +161,7 @@ export default function MainPage() {
               isClosable: true,
             });
             setTimeout(() => {
-              onOpen();
+              onGameOverOpen();
             }, 2000);
           }
         }
@@ -258,6 +311,23 @@ export default function MainPage() {
   };
   return (
     <VStack bg="black" h={"100%"}>
+      <Modal isOpen={isGameOverOpen} onClose={onGameOverClose}>
+        <ModalOverlay />
+        <ModalContent bg={"gray.700"} color="white">
+          <ModalHeader>விளையாடியதற்கு நன்றி!</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody py={10}>
+            <Text fontSize={"lg"}>
+              புதிய வார்த்தையுடன் விளையாட, நாளை வாருங்கள்!
+            </Text>
+          </ModalBody>
+
+          <ModalFooter>
+            <SocialHandle />
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
       <Modal isOpen={isOpen} onClose={onClose} size={"4xl"}>
         <ModalOverlay />
         <ModalContent bg="black" color={"white"} fontSize="sm">
@@ -336,56 +406,7 @@ export default function MainPage() {
           </ModalBody>
 
           <ModalFooter>
-            <VStack spacing={3}>
-              <HStack>
-                <Text>Made with</Text>
-                <BsFillHeartFill color="red" />
-                <Text>
-                  in தமிழ் by <strong>Sibi</strong>
-                </Text>
-              </HStack>
-              <HStack spacing={6}>
-                <BsGithub
-                  fontSize={24}
-                  onClick={() => {
-                    if (window) {
-                      window
-                        .open("https://github.com/sibi-sharanyan", "_blank")
-                        ?.focus();
-                    }
-                  }}
-                  cursor={"pointer"}
-                  color="white"
-                />
-                <BsLinkedin
-                  fontSize={24}
-                  onClick={() => {
-                    if (window) {
-                      window
-                        .open(
-                          "https://www.linkedin.com/in/sibi-sharanyan",
-                          "_blank"
-                        )
-                        ?.focus();
-                    }
-                  }}
-                  cursor={"pointer"}
-                  color="white"
-                />{" "}
-                <BsTwitter
-                  fontSize={24}
-                  onClick={() => {
-                    if (window) {
-                      window
-                        .open("https://twitter.com/sibi_sharanyan", "_blank")
-                        ?.focus();
-                    }
-                  }}
-                  cursor={"pointer"}
-                  color="white"
-                />{" "}
-              </HStack>
-            </VStack>
+            <SocialHandle />
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -531,6 +552,21 @@ export default function MainPage() {
 
                 // console.log("answers", answers);
                 initiateAnswerAnimation(currentRow, answers);
+                if (currentRow + 1 === 6) {
+                  toast({
+                    title: word,
+                    status: "info",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: false,
+                  });
+                  setIsAnimationPlaying(true);
+                  setTimeout(() => {
+                    onGameOverOpen();
+                  }, 5000);
+                  return;
+                }
+
                 chars[currentRow + 1] = [];
                 setCurrentCol(0);
                 setCurrentRow(currentRow + 1);
