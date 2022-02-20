@@ -407,7 +407,7 @@ export default function MainPage() {
           onClick={onOpen}
         />
         <Text fontWeight={"bold"} fontSize={"3xl"} color={"white"}>
-          சொல்லாடல்
+          Wordle in தமிழ்
         </Text>
       </HStack>
 
