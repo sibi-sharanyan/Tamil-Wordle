@@ -14,6 +14,12 @@ import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import { useToast } from "@chakra-ui/react";
 import dayjs from "dayjs";
+import {
+  BsTwitter,
+  BsFillHeartFill,
+  BsLinkedin,
+  BsGithub,
+} from "react-icons/bs";
 import validWords from "../wordlist/all-word";
 // function toUnicode(str) {
 //   return str
@@ -325,7 +331,58 @@ export default function MainPage() {
             </VStack>
           </ModalBody>
 
-          <ModalFooter>Made with love by Sibi.</ModalFooter>
+          <ModalFooter>
+            <VStack spacing={3}>
+              <HStack>
+                <Text>Made with</Text>
+                <BsFillHeartFill color="red" />
+                <Text>
+                  in தமிழ் by <strong>Sibi</strong>
+                </Text>
+              </HStack>
+              <HStack spacing={6}>
+                <BsGithub
+                  fontSize={24}
+                  onClick={() => {
+                    if (window) {
+                      window
+                        .open("https://github.com/sibi-sharanyan", "_blank")
+                        ?.focus();
+                    }
+                  }}
+                  cursor={"pointer"}
+                  color="white"
+                />
+                <BsLinkedin
+                  fontSize={24}
+                  onClick={() => {
+                    if (window) {
+                      window
+                        .open(
+                          "https://www.linkedin.com/in/sibi-sharanyan",
+                          "_blank"
+                        )
+                        ?.focus();
+                    }
+                  }}
+                  cursor={"pointer"}
+                  color="white"
+                />{" "}
+                <BsTwitter
+                  fontSize={24}
+                  onClick={() => {
+                    if (window) {
+                      window
+                        .open("https://twitter.com/sibi_sharanyan", "_blank")
+                        ?.focus();
+                    }
+                  }}
+                  cursor={"pointer"}
+                  color="white"
+                />{" "}
+              </HStack>
+            </VStack>
+          </ModalFooter>
         </ModalContent>
       </Modal>
 
