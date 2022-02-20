@@ -133,15 +133,15 @@ export default function MainPage() {
     const index = diffDays % wordsCount;
     let currentWord = easyWords[index];
 
-    console.log(
-      "days",
-      currentDateStr,
-      diffDays,
-      index,
-      wordsCount,
-      currentWord,
-      currentWord.match(/[\u0b80-\u0bff][\u0bbe-\u0bcd\u0bd7]?/gi)
-    );
+    // console.log(
+    //   "days",
+    //   currentDateStr,
+    //   diffDays,
+    //   index,
+    //   wordsCount,
+    //   currentWord,
+    //   currentWord.match(/[\u0b80-\u0bff][\u0bbe-\u0bcd\u0bd7]?/gi)
+    // );
 
     return currentWord.match(
       /[\u0b80-\u0bff][\u0bbe-\u0bcd\u0bd7]?/gi
@@ -162,7 +162,7 @@ export default function MainPage() {
   useEffect(() => {
     fetchWordLength();
     let isOldUser = localStorage.getItem("isOldUser");
-    console.log("isOldUser", isOldUser);
+    // console.log("isOldUser", isOldUser);
     if (!isOldUser) {
       onOpen();
       localStorage.setItem("isOldUser", "true");
@@ -482,7 +482,7 @@ export default function MainPage() {
               let diaterics = "ா ி ீ ு ூ ெ ே ை ொ ோ ௌ ்";
 
               if (key === "Enter") {
-                console.log("currentcol", currentCol, word.length);
+                // console.log("currentcol", currentCol, word.length);
                 if (currentCol !== word.length) {
                   toast({
                     title: "போதுமான எழுத்துக்கள் இல்லை",
@@ -529,7 +529,7 @@ export default function MainPage() {
                   }
                 }
 
-                console.log("answers", answers);
+                // console.log("answers", answers);
                 initiateAnswerAnimation(currentRow, answers);
                 chars[currentRow + 1] = [];
                 setCurrentCol(0);
@@ -544,13 +544,13 @@ export default function MainPage() {
                   lastPressedKey.charCodeAt(0),
                   key.charCodeAt(0)
                 );
-                console.log(
-                  newChar,
-                  String.fromCharCode(
-                    lastPressedKey.charCodeAt(0),
-                    key.charCodeAt(0)
-                  )
-                );
+                // console.log(
+                //   newChar,
+                //   String.fromCharCode(
+                //     lastPressedKey.charCodeAt(0),
+                //     key.charCodeAt(0)
+                //   )
+                // );
 
                 if (!isValidCharacter(newChar)) {
                   toast({
@@ -574,7 +574,7 @@ export default function MainPage() {
               setFilledCharacters(chars);
               getBlocks(word.length);
 
-              console.log("Key pressed", key, chars, filledCharacters);
+              // console.log("Key pressed", key, chars, filledCharacters);
             }}
           />
         </VStack>
