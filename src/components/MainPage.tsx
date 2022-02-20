@@ -538,10 +538,22 @@ export default function MainPage() {
                   }
                 }
 
+                const tempWord = [...word];
+
+                for (let i = 0; i < tempWord.length; i++) {
+                  if (currentWord[i].char === tempWord[i]) {
+                    tempWord[i] = "@";
+                  }
+                }
+
                 for (let i = 0; i < word.length; i++) {
                   if (currentWord[i].char === word[i]) {
                     answers.push("#538d4e");
-                  } else if (word.includes(currentWord[i].char)) {
+                  } else if (tempWord.includes(currentWord[i].char)) {
+                    const firstInd = tempWord.indexOf(currentWord[i].char);
+                    if (firstInd !== -1) {
+                      tempWord[firstInd] = "@";
+                    }
                     answers.push("#b59f3b");
                   } else if (isSameSeries(word[i], currentWord[i].char)) {
                     answers.push("#713f48");
