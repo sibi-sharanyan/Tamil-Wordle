@@ -394,6 +394,7 @@ export default function MainPage() {
         borderBottom={"1px solid #3a3a3c"}
         w="100%"
         justifyContent={"center"}
+        mb={2}
       >
         <QuestionOutlineIcon
           position={"absolute"}
@@ -413,13 +414,17 @@ export default function MainPage() {
       <VStack
         w={"100%"}
         h={"90%"}
-        spacing={5}
         justifyContent={["space-evenly", "space-evenly", "space-evenly"]}
       >
-        <VStack>
+        <VStack w="100%">
           {blocks.map((block, ind) => {
             return (
-              <HStack key={ind}>
+              <HStack
+                justifyContent={"center"}
+                key={ind}
+                w={["100%", "70%", "60%", "30%"]}
+                maxW={"22rem"}
+              >
                 {block.map((bl, ind2) => {
                   return (
                     <Box
@@ -427,10 +432,11 @@ export default function MainPage() {
                       justifyContent={"center"}
                       alignItems={"center"}
                       fontWeight={"bold"}
-                      fontSize={["sm", "sm", "lg"]}
+                      fontSize={["sm", "sm", "md"]}
+                      lineHeight="2rem"
                       key={ind2}
-                      w={[12, 12, 16]}
-                      h={[12, 12, 16]}
+                      w={["20%", "20%", "20%"]}
+                      h={["3rem", "3rem", "3.7rem"]}
                       border="2px solid #3a3a3c"
                       bg={
                         (filledCharacters[ind] &&
@@ -456,10 +462,12 @@ export default function MainPage() {
           <Keyboard
             layout={{
               default: [
-                "ா ி ீ ு ூ ெ ே ை ொ ோ ௌ ்",
+                "ா ி ீ ு ூ",
+                "ஃ ெ ே ை ொ ோ ௌ ்",
                 "ஆ ஈ ஊ ஏ ள ற ன ட ண ச ஞ",
                 "அ இ உ ஐ எ க ப ம த ந ய",
-                "enter ஔ ஓ ஒ வ ங ல ர ழ ஃ {bksp}",
+                "ஔ ஓ ஒ வ ங ல ர ழ",
+                "Enter {bksp}",
               ],
             }}
             onChange={(e) => {}}
@@ -472,7 +480,7 @@ export default function MainPage() {
 
               let diaterics = "ா ி ீ ு ூ ெ ே ை ொ ோ ௌ ்";
 
-              if (key === "enter") {
+              if (key === "Enter") {
                 console.log("currentcol", currentCol, word.length);
                 if (currentCol !== word.length) {
                   toast({
