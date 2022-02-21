@@ -1,4 +1,11 @@
-import { Box, HStack, Text, useDisclosure, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import {
   Modal,
@@ -14,11 +21,14 @@ import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import { useToast } from "@chakra-ui/react";
 import dayjs from "dayjs";
+import copy from "copy-to-clipboard";
+
 import {
   BsTwitter,
   BsFillHeartFill,
   BsLinkedin,
   BsGithub,
+  BsShare,
 } from "react-icons/bs";
 import validWords from "../wordlist/all-word";
 import easyWords from "../wordlist/easy-words";
@@ -129,6 +139,7 @@ export default function MainPage() {
   const [currentRow, setCurrentRow] = React.useState(0);
   const [currentCol, setCurrentCol] = React.useState(0);
   const [isAnimationPlaying, setIsAnimationPlaying] = React.useState(false);
+  const [isCorrect, setCorrect] = React.useState(false);
   const getBlocks = (wordLength: number) => {
     const blocks = [];
     for (let i = 0; i < 6; i++) {
@@ -161,6 +172,7 @@ export default function MainPage() {
               isClosable: true,
             });
             setTimeout(() => {
+              setCorrect(true);
               onGameOverOpen();
             }, 2000);
           }
@@ -320,6 +332,52 @@ export default function MainPage() {
             <Text fontSize={"lg"}>
               புதிய வார்த்தையுடன் விளையாட, நாளை வாருங்கள்!
             </Text>
+
+            <Button
+              colorScheme={"green"}
+              mt={10}
+              onClick={() => {
+                const date1 = dayjs("2022-02-19");
+                const date2 = dayjs(dayjs().format("YYYY-MM-DD"));
+                const diffDays = date2.diff(date1, "day");
+
+                let text = `https://tamil-wordle.netlify.app ${diffDays} ${
+                  currentRow === 5 ? (isCorrect ? 6 : "X") : currentRow
+                }/6 \n`;
+                for (let i = 0; i < currentRow + 1; i++) {
+                  text += "\n";
+                  for (let j = 0; j < 4; j++) {
+                    if (!filledCharacters[i][j]) {
+                      break;
+                    }
+                    if (filledCharacters[i][j].bgColor === "#538d4e") {
+                      text += "🟩";
+                    } else if (filledCharacters[i][j].bgColor === "#b59f3b") {
+                      text += "🟨";
+                    } else if (filledCharacters[i][j].bgColor === "#713f48") {
+                      text += "🟫";
+                    } else if (filledCharacters[i][j].bgColor === "#3a3a3c") {
+                      text += "⬛";
+                    }
+                  }
+                }
+
+                copy(text);
+
+                toast({
+                  title: "Copied results to clipboard",
+                  status: "info",
+                  position: "top",
+                  duration: 2000,
+                  isClosable: false,
+                });
+              }}
+            >
+              <HStack spacing={3}>
+                <Text>SHARE</Text>
+                <BsShare />
+              </HStack>
+            </Button>
           </ModalBody>
 
           <ModalFooter>
