@@ -124,16 +124,49 @@ const SocialHandle = () => (
 export default function MainPage() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [disableInput, setDisableInput] = React.useState(false);
   const {
     isOpen: isGameOverOpen,
-    onOpen: onGameOverOpen,
+    onOpen: onGameOverOpenModal,
     onClose: onGameOverClose,
   } = useDisclosure();
 
   const [word, setWord] = React.useState<string[]>([]);
-  const [filledCharacters, setFilledCharacters] = React.useState<
+  const [filledCharacters, setFilledCharactersState] = React.useState<
     { char: string; bgColor?: string }[][]
   >([[]]);
+
+  const setFilledCharacters = (
+    data: { char: string; bgColor?: string }[][]
+  ) => {
+    setFilledCharactersState(data);
+
+    try {
+      let dataToBeStored: any = [];
+      if (data.length !== 6) {
+        dataToBeStored = data.slice(0, -1);
+      } else {
+        dataToBeStored = data;
+      }
+
+      dataToBeStored = dataToBeStored.filter(
+        (data: any) => data.filter((d: any) => d.bgColor).length === 4
+      );
+
+      const dataToBeStoredString = JSON.stringify({
+        currentWord: word,
+        filledCharacters: dataToBeStored,
+      });
+      if (word.length && !isAnimationPlaying)
+        localStorage.setItem("tamil-wordle-data", dataToBeStoredString);
+    } catch (error) {}
+  };
+
+  const onGameOverOpen = () => {
+    onGameOverOpenModal();
+    setDisableInput(true);
+  };
+
   const [blocks, setBlocks] = React.useState<number[][]>([]);
   const [lastPressedKey, setLastPressedKey] = React.useState("");
   const [currentRow, setCurrentRow] = React.useState(0);
@@ -224,6 +257,41 @@ export default function MainPage() {
     getBlocks(word.length);
   };
 
+  const initStored = () => {
+    try {
+      const storedData = localStorage.getItem("tamil-wordle-data");
+      if (storedData) {
+        const parsedData = JSON.parse(storedData);
+        const correctWord = parsedData.currentWord.join("");
+
+        if (
+          parsedData.filledCharacters.length > 0 &&
+          correctWord === word.join("")
+        ) {
+          let chars = parsedData.filledCharacters;
+          chars = chars.filter((row: any) => row.length === 4);
+          setCurrentRow(chars.length);
+          const lastWord = chars[chars.length - 1]
+            .map((v: any) => v.char)
+            .join("");
+
+          if (correctWord === lastWord) {
+            onGameOverOpen();
+          }
+
+          chars[chars.length] = [];
+          setFilledCharacters(chars);
+
+          if (parsedData.filledCharacters.length === 6) {
+            onGameOverOpen();
+          }
+        }
+      }
+    } catch (error) {
+      setFilledCharactersState([[]]);
+    }
+  };
+
   useEffect(() => {
     fetchWordLength();
     let isOldUser = localStorage.getItem("isOldUser");
@@ -233,6 +301,12 @@ export default function MainPage() {
       localStorage.setItem("isOldUser", "true");
     }
   }, []);
+
+  useEffect(() => {
+    if (word.length) {
+      initStored();
+    }
+  }, [word]);
 
   const ExampleWord1 = () => {
     let word = ["க", "டி", "த", "ம்"];
@@ -552,6 +626,7 @@ export default function MainPage() {
             }}
             onChange={(e) => {}}
             onKeyPress={(key: string) => {
+              if (disableInput) return;
               if (isAnimationPlaying) {
                 return;
               }
