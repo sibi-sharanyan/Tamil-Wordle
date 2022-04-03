@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   HStack,
+  Link,
   Text,
   useDisclosure,
   VStack,
@@ -15,6 +16,7 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Image,
 } from "@chakra-ui/react";
 import { QuestionOutlineIcon } from "@chakra-ui/icons";
 import Keyboard from "react-simple-keyboard";
@@ -118,6 +120,19 @@ const SocialHandle = () => (
         color="white"
       />{" "}
     </HStack>
+    <Link
+      href="https://www.buymeacoffee.com/sibisharanyan"
+      target="_blank"
+      py={4}
+    >
+      <Image
+        cursor={"pointer"}
+        src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+        alt="Buy Me A Coffee"
+        height={"60px"}
+        width={"217px"}
+      />
+    </Link>
   </VStack>
 );
 
