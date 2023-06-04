@@ -2,7 +2,7 @@
 
 This is a Tamil version of the popular word game, Wordle. It was made as a fun weekend project and built in a few hours with TypeScript, React, Chakra UI, and lots of love in தமிழ். 
 
-<img src="https://media.licdn.com/dms/image/C5622AQHUmk4lEdRkfw/feedshare-shrink_1280/0/1645345484315?e=1688601600&v=beta&t=6k2jGlEQsCzY4PeAzgoiNWHGi2mYSl8iU-258DtM_u8" width="500" height="300" />
+<img src="https://media.licdn.com/dms/image/C5622AQHUmk4lEdRkfw/feedshare-shrink_1280/0/1645345484315?e=1688601600&v=beta&t=6k2jGlEQsCzY4PeAzgoiNWHGi2mYSl8iU-258DtM_u8" width="600" height="600" />
 
 ## Features
 - The game recognizes over 12,000 four-lettered Tamil words.
