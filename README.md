@@ -2,7 +2,7 @@
 
 This is a Tamil version of the popular word game, Wordle. It was made as a fun weekend project and built in a few hours with TypeScript, React, Chakra UI, and lots of love in தமிழ். 
 
-<img src="https://media.licdn.com/dms/image/C5622AQHUmk4lEdRkfw/feedshare-shrink_1280/0/1645345484315?e=1688601600&v=beta&t=6k2jGlEQsCzY4PeAzgoiNWHGi2mYSl8iU-258DtM_u8" width="600" height="600" />
+<img src="https://i.imgur.com/WytPtTH.gif" width="600" height="600" />
 
 ## Features
 - **Vast Word Database**: The game recognizes over 12,000 four-lettered Tamil words, providing players with a wide range of options to guess and discover. With such a comprehensive word database, the gameplay experience is enriched, and players can explore various words from the Tamil language.
@@ -15,7 +15,7 @@ This is a Tamil version of the popular word game, Wordle. It was made as a fun w
 
 
 ## Live Demo
-You can check out the live demo of the project [here](https://wordle.sibi.me).
+You can check out the live demo of the project [here](https://wordle.si-bi.com).
 
 ## Built With
 - [TypeScript](https://www.typescriptlang.org/) - Strict syntactical superset of JavaScript adding optional static typing.
