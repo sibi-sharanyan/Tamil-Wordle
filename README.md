@@ -2,7 +2,7 @@
 
 This is a Tamil version of the popular word game, Wordle. It was made as a fun weekend project and built in a few hours with TypeScript, React, Chakra UI, and lots of love in தமிழ். 
 
-<img src="https://i.imgur.com/WytPtTH.gif" width="600" height="600" />
+<img src="https://i.imgur.com/dXg8aIi.gif" width="600" height="600" />
 
 ## Features
 - **Vast Word Database**: The game recognizes over 12,000 four-lettered Tamil words, providing players with a wide range of options to guess and discover. With such a comprehensive word database, the gameplay experience is enriched, and players can explore various words from the Tamil language.
